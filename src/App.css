@@ -27,7 +27,7 @@
   background-color: #7655E9;;
   font-family: 'Montserrat', sans-serif;
   border: none;
-  transition: background-color 1s, color 1s, width 1s;
+  transition: background-color .4s, color .4s, width .4s;
   z-index: 10;
 }
 
@@ -43,16 +43,16 @@
   border: 2px solid #7655E9;
   background-color: transparent;
   color: #7655E9;
-  transition: background-color 0.3s ease, color 0.3s ease, width 1s;
+  transition: background-color 0.3s ease, color 0.3s ease, width .4s;
   pointer-events: none;
 }
 
 .final.progress-button button {
-  animation: showFinalBtnState 1s linear;
+  animation: showFinalBtnState .4s linear;
 }
 
 .final.progress-button span {
-  animation: showOverTime 1s linear;
+  animation: showOverTime .4s linear;
 }
 
 .progress-button button:hover {
@@ -90,9 +90,9 @@
 }
 
 .success.progress-button span {
-  -webkit-transition: opacity 1s ease;
-  transition: opacity 1s ease;
-  transition-delay: 1s;
+  -webkit-transition: opacity .4s ease;
+  transition: opacity .4s ease;
+  transition-delay: .4s;
 }
 
 .svg-wrapper {
@@ -102,9 +102,9 @@
   transform: translateY(-50%);
   opacity: 0;
   z-index: -100;
-  -webkit-transition: opacity 1s ease;
-  transition: opacity 1s ease;
-  transition-delay: 1s;
+  -webkit-transition: opacity .4s ease;
+  transition: opacity .4s ease;
+  transition-delay: .4s;
 }
 
 .success.svg-wrapper {
@@ -160,18 +160,19 @@
     stroke-dashoffset: -124;
   }
 }
+
 @-webkit-keyframes color {
   0% {
-    stroke: #70c542;
+    stroke: #7655E9;
   }
   40% {
-    stroke: #70c542;
+    stroke: #7655E9;
   }
   66% {
-    stroke: #70c542;
+    stroke: #7655E9;
   }
   80%, 90% {
-    stroke: #70c542;
+    stroke: #7655E9;
   }
 }
 
@@ -189,8 +190,8 @@
 }
 
 .circular-loader {
-  -webkit-animation: rotate 2s linear infinite;
-  animation: rotate 2s linear infinite;
+  -webkit-animation: rotate 1s linear infinite;
+  animation: rotate 1s linear infinite;
   height: 100%;
   -webkit-transform-origin: center center;
   -ms-transform-origin: center center;
@@ -216,8 +217,8 @@
   transform: translateX(-50%);
   top: 0;
   left: 50%;
-  transition: opacity 1s ease;
-  transition-delay: 1s;
+  transition: opacity .4s ease;
+  transition-delay: .4s;
   pointer-events: none;
   z-index: -100;
   opacity: 0;
