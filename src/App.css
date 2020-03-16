@@ -1,38 +1,138 @@
-.App {
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-button {
+  position: relative;
+  display: inline-block;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.progress-button button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  width: 280px;
+  height: 48px;
+  border-radius: 30px;
+  color: #fff;
+  letter-spacing: 1px;
+  background-color: #7655E9;;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  transition: background-color 1s, color 1s, width 1s;
+  z-index: 10;
+}
+
+.progress-button button span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.success.progress-button button {
+  width: 280px;
+  border: 2px solid #7655E9;
+  background-color: transparent;
+  color: #7655E9;
+  transition: background-color 0.3s ease, color 0.3s ease, width 1s;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.final.success.progress-button button {
+  border: none;
+  color: #ffffff;
+  background-color: #7655E9;
+  pointer-events: all;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.progress-button button:hover {
+  background-color: #B1A0EE;
 }
 
-.App-link {
-  color: #61dafb;
+.progress-button button:focus {
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.loading.progress-button button {
+  width: 48px;
+  border: 2px solid rgba(77, 92, 101, 0.2);
+  background-color: transparent;
+  color: #fff;
+}
+
+.loading.progress-button span {
+  -webkit-transition: opacity 0.15s;
+  transition: opacity 0.15s;
+}
+
+.loading.progress-button span  {
+  opacity: 0; /* keep it hidden in all states */
+}
+
+.progress-button button span {
+  -webkit-transition: opacity 0.3s 0.1s;
+  transition: opacity 0.3s 0.1s;
+}
+
+.circular-progress {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  --percentage: 0deg;
+  font-size: 1.5em;
+  transition: opacity 1s ease;
+  transition-delay: 1s;
+  pointer-events: none;
+  z-index: -100;
+  background: linear-gradient(#fff, #fff) content-box no-repeat,
+  conic-gradient(#7655E9 var(--percentage,0), transparent var(--percentage,0)) border-box;
+  border: 2px solid rgba(77, 92, 101, 0.2);
+  opacity: 0;
+}
+
+.show {
+  opacity: 1;
+}
+
+.success .circular-progress {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transition-delay: 0s;
+}
+
+.success.progress-button span {
+  -webkit-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  transition-delay: 1s;
+}
+
+.svg-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 45px;
+  transform: translateY(-50%);
+  opacity: 0;
+  z-index: -100;
+  -webkit-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  transition-delay: 1s;
+}
+
+.success.svg-wrapper {
+  opacity: 1;
+  z-index: 1;
 }
