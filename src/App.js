@@ -1,80 +1,66 @@
 import React from 'react';
 import './App.css';
 import CheckMark from "./check-mark";
+import SvgCircle from "./circle";
 
 function App() {
-  const divRef = React.useRef();
   const [loading, setLoading] = React.useState(false);
-  const [value, setValue] = React.useState(0);
   const [success, setSuccess] = React.useState(false);
   const [final, setFinal] = React.useState(false);
 
-  React.useEffect(() => {
-    const progressInterval = setInterval(() => {
-      setValue(prevState => {
-        if (prevState > 360) {
-          return 0
-        }
-
-        return prevState + 5;
-      })
-    }, 100);
-    if (success) {
-      clearInterval(progressInterval)
-    }
-    return () => {
-      clearInterval(progressInterval);
-    }
-  }, [success])
-
-  const onProgress = value => {
-    if (divRef.current)
-    divRef.current.style.setProperty('--percentage', `${value}deg`);
-  }
-
-  onProgress(value);
-
   const handleOnSubmit = () => {
     setLoading(true);
-    setTimeout(() =>{
-      setValue(0);
-    }, 1000);
     setTimeout(() => {
       setSuccess(true)
-    }, 3000);
+    }, 4000);
     setTimeout(() => {
       setFinal(true);
-    }, 5000);
+    }, 7500);
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(false);
+      setFinal(final);
+    }, 8000);
   };
 
-  let buttonStyles = '';
-  let circularProgressStyles = '';
+  let stateStyles = '';
+  let btnText = 'Submit';
+  let loaderWrapperStyles = '';
+  let checkMarkStyles = '';
 
   if (loading) {
-    buttonStyles = 'loading';
-    circularProgressStyles = 'show';
+    stateStyles = 'loading';
+    loaderWrapperStyles = 'show';
   }
 
 
   if (success) {
-    buttonStyles = 'success';
-    circularProgressStyles = '';
+    stateStyles = 'success';
+    btnText = 'Message Sent';
+    loaderWrapperStyles = '';
+    checkMarkStyles = 'success'
   }
 
   if (final) {
-    buttonStyles = 'final';
+    stateStyles = 'final';
+    btnText = 'Submit';
+    checkMarkStyles = 'success final'
   }
 
   return (
     <div className="container">
-      <div id="progress-button" className={`progress-button ${buttonStyles}`}>
+      <div id="progress-button" className={`progress-button ${stateStyles}`}>
         <button onClick={handleOnSubmit} disabled={loading} >
           <span>
-            {success ? 'Message Sent' : 'Submit'}
+            {btnText}
         </span>
-            <CheckMark className={success ? 'success svg-wrapper' : 'svg-wrapper'}/>
+            <CheckMark className={`svg-wrapper ${checkMarkStyles}`}/>
         </button>
-        <div ref={divRef} className={`circular-progress ${circularProgressStyles}`}/>
+        <div className={`loader-wrapper ${loaderWrapperStyles}`}>
+          <div className='loader'>
+            <SvgCircle className='circular-loader'/>
+          </div>
+        </div>
       </div>
     </div>
   );

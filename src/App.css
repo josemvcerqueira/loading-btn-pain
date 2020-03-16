@@ -13,6 +13,7 @@
 }
 
 .progress-button button {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,11 +47,12 @@
   pointer-events: none;
 }
 
-.final.success.progress-button button {
-  border: none;
-  color: #ffffff;
-  background-color: #7655E9;
-  pointer-events: all;
+.final.progress-button button {
+  animation: showFinalBtnState 1s linear;
+}
+
+.final.progress-button span {
+  animation: showOverTime 1s linear;
 }
 
 .progress-button button:hover {
@@ -83,35 +85,8 @@
   transition: opacity 0.3s 0.1s;
 }
 
-.circular-progress {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 48px;
-  height: 48px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  --percentage: 0deg;
-  font-size: 1.5em;
-  transition: opacity 1s ease;
-  transition-delay: 1s;
-  pointer-events: none;
-  z-index: -100;
-  background: linear-gradient(#fff, #fff) content-box no-repeat,
-  conic-gradient(#7655E9 var(--percentage,0), transparent var(--percentage,0)) border-box;
-  border: 2px solid rgba(77, 92, 101, 0.2);
-  opacity: 0;
-}
-
 .show {
   opacity: 1;
-}
-
-.success .circular-progress {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  transition-delay: 0s;
 }
 
 .success.progress-button span {
@@ -135,4 +110,125 @@
 .success.svg-wrapper {
   opacity: 1;
   z-index: 1;
+}
+
+.final.success.svg-wrapper {
+  display: none;
+}
+
+@keyframes showOverTime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes showFinalBtnState {
+  from {
+    border: 2px solid #7655E9;
+    background-color: transparent;
+    color: #7655E9;
+  }
+  to {
+    border: none;
+    color: #ffffff;
+    background-color: #7655E9;
+    pointer-events: all;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124;
+  }
+}
+@-webkit-keyframes color {
+  0% {
+    stroke: #70c542;
+  }
+  40% {
+    stroke: #70c542;
+  }
+  66% {
+    stroke: #70c542;
+  }
+  80%, 90% {
+    stroke: #70c542;
+  }
+}
+
+
+.loader {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.loader:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.circular-loader {
+  -webkit-animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  -webkit-transform-origin: center center;
+  -ms-transform-origin: center center;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}
+
+.loader-path {
+  stroke-dasharray: 150,200;
+  stroke-dashoffset: -10;
+  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+.loader-wrapper {
+  display: inline-block;
+  position: absolute;
+  transform: translateX(-50%);
+  top: 0;
+  left: 50%;
+  transition: opacity 1s ease;
+  transition-delay: 1s;
+  pointer-events: none;
+  z-index: -100;
+  opacity: 0;
+}
+
+.show {
+  opacity: 1;
+}
+
+.success .loader-wrapper {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transition-delay: 0s;
 }
